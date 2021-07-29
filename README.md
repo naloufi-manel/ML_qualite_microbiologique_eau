@@ -3,12 +3,13 @@
 
 Le répertoire contient neuf fichiers :
 
-- Trois fichiers avec les modéles d'apprentissage automatique : ML_Marne_Ecoli_Prediction.ipynb, ML_Marne2_Ecoli_Prediction.ipynb et ML_Seine_Ecoli_Prediction.ipynb. Respectivement pour l'entrainement avec la Marne avec 11 paramétres, la Marne avec 7 paramétres et la Seine.
+- Trois fichiers avec les modéles d'apprentissage automatique : (ML_Marne_Ecoli_Prediction.ipynb, ML_Marne2_Ecoli_Prediction.ipynb et ML_Seine_Ecoli_Prediction.ipynb) respectivement pour l'entrainement avec la Marne avec 11 paramétres, la Marne avec 7 paramétres et la Seine.
 Chaque fichier Python contient les 6 modèles d'apprentissage automatique pour la prédiction de la concentration d'E. coli. 
 Le fichier contient toutes les étapes de lecture des données, d'analyse descriptive, de division du jeu de données en formation et test, de normalisation des données et de formation et test des 6 modèles d'apprentissage automatique. 
 Les données de test et les prédictions sont ensuite exportées. 
 La division du jeu de données en formation et test est faite de manière aléatoire par train_test_split. 
-Le paramètre random_state permet de contrôler la division, ainsi passer un nombre entier permet une division reproductible. 
+Le paramètre random_state permet de contrôler la division, ainsi indiquer un nombre entier permet une division reproductible. 
+Au niveau des deux fichiers, ML_Marne2_Ecoli_Prediction.ipynb et ML_Seine_Ecoli_Prediction.ipynb, une étape de plus a été réaliser afin de tester les modéles sur respectivement toutes les données de la Seine et de la Marne. 
 Afin de tester plusieurs divisions, le script a été exécuté 10 fois en changeant à chaque fois la valeur entière du paramètre "random_state" de 0 à 9. 
 
 - Script_Somme_pluvio.R : Fichier R pour l'analyse des données de pluviométries. À partir des données de chaque pluviométres, la somme des pluies journalieres a été calculer puis extraite pour les periodes correspondants au campagnes de prélevements. 
