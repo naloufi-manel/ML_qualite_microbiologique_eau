@@ -30,7 +30,7 @@ rf_rep
 
 # Visualisation des résultats de la prédiction par le modèle basé sur la RF. 
 x=rep(1:12,1)
-plot(log(rf_rep$RF_Ecoli_pred),log(rf_rep$Ecolireal), xlab="Log(E.coli)",ylab="Log(predicted E.coli)", add=TRUE, xlim=c(3,13), ylim=c(3,13))
+plot(log(rf_rep$RF_Ecoli_pred),log(rf_rep$Ecolireal), xlab=expression(paste("Concentration en ", italic("E. coli"), "mesurée (Log NPP/100ml)")),ylab =expression(paste("Concentration en ", italic("E. coli"), "prédite (Log NPP/100ml)")), add=TRUE, xlim=c(3,13), ylim=c(3,13))
 lines(x,x, col="red")
 plot(rf_rep$RF_Ecoli_pred,rf_rep$Ecolireal, xlab="Log(E.coli)",ylab="Log(predicted E.coli)", add=TRUE)
 lines(x,x, col="red")
