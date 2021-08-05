@@ -34,11 +34,11 @@ for (k in 1:length(ldf_1)){
   tab[k,3]<-length(which(myList[[k]]$Fit.50..=="non"))
   tab[k,4]<-round((as.integer(tab[k,2])*100)/99, digits = 2)
   tab[k,5]<-round((as.integer(tab[k,3])*100)/99, digits = 2)
-  }
+}
 tab
 
 # exporter le tableau 
-write.csv(tab, file = "/home/manel/Bureau/BD/donnee+pluvio/smv-complet/ML/replicat/calcule-nb-bien-predit.csv")
+write.csv(tab, file = "/home/manel/Bureau/BD/donnee+pluvio/smv+vdp-pluvio/donnee-sans-na/smv-vdp/ML/train_seine/calcule-nb-bien-predit.csv")
 ################################################################################################
 
 
@@ -56,7 +56,7 @@ colnames(tab_pval)<-c("replicat","ec-reel","ec-rf")
 for (k in 1:length(ldf_1)){
   ### Analyse de la p-value du test de Shapiro 
   tab_pval[k,1]<-names(myList[k])
-  if( shapiro.test(myList[[k]][,10])$p.value > 0.05) {tab_pval[k,2]<-1}
+  if( shapiro.test(myList[[k]][,9])$p.value > 0.05) {tab_pval[k,2]<-1}
   else { tab_pval[k,2]<-0}
   if( shapiro.test(myList[[k]][,10])$p.value > 0.05) {tab_pval[k,3]<-1}
   else { tab_pval[k,3]<-0}
@@ -70,34 +70,36 @@ tab_pval
 ################################### Analyse de corrélation #######################################
 # Création de la table qui contiendra les corrélations  
 x<-sample(1, (2*length(myList)), replace = TRUE)
-tab_cor<-cbind(x,x,x,x,x,x,x)
+tab_cor<-cbind(x,x,x,x,x,x,x,x)
 
 # Pour chaque réplicat (graine), une analyse de corrélation est effectuée entre la concentration prédite d'E.coli et les paramètres de l'eau pour la prédiction raisonnable et inexacte.
 seed<-c("seed0","seed1","seed2","seed3","seed4","seed5","seed6","seed7","seed8","seed9")
-colnames(tab_cor)<-c("donnee","Temperature","Conductivity","Turbidity","Number of dry days","Rainfall of the day","Rainfall of the day before")
+colnames(tab_cor)<-c("donnee","Temperature","Conductivity","Turbidity","Number of dry days","Rainfall of the day","Rainfall of the day before","debit")
 i=0
 for (k in 1:length(ldf_1)){
   # Analyse pour la prédiction raisonnable
   tab_cor[k+i,1]<-paste(seed[i+1],"-reasonable")
   rf_fit<-myList[[k]][which(myList[[k]][,12]=="fit"),]
-  tab_cor[k+i,2]<-cor(rf_fit[,10],rf_fit[,3],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,3]<-cor(rf_fit[,10],rf_fit[,4],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,4]<-cor(rf_fit[,10],rf_fit[,5],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,5]<-cor(rf_fit[,10],rf_fit[,6],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,6]<-cor(rf_fit[,10],rf_fit[,7],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,7]<-cor(rf_fit[,10],rf_fit[,8],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,2]<-cor(rf_fit[,10],rf_fit[,2],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,3]<-cor(rf_fit[,10],rf_fit[,3],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,4]<-cor(rf_fit[,10],rf_fit[,4],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,5]<-cor(rf_fit[,10],rf_fit[,5],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,6]<-cor(rf_fit[,10],rf_fit[,6],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,7]<-cor(rf_fit[,10],rf_fit[,7],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,8]<-cor(rf_fit[,10],rf_fit[,8],  method = "spearman", use = "na.or.complete")
   i=i+1
   
   # Analyse pour la prédiction inexacte
   tab_cor[k+i,1]<-paste(seed[i],"-inaccurate")
   rf_non<-myList[[k]][which(myList[[k]][,12]=="non"),]
-  tab_cor[k+i,2]<-cor(rf_non[,10],rf_non[,3],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,3]<-cor(rf_non[,10],rf_non[,4],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,4]<-cor(rf_non[,10],rf_non[,5],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,5]<-cor(rf_non[,10],rf_non[,6],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,6]<-cor(rf_non[,10],rf_non[,7],  method = "spearman", use = "na.or.complete")
-  tab_cor[k+i,7]<-cor(rf_non[,10],rf_non[,8],  method = "spearman", use = "na.or.complete")
-
+  tab_cor[k+i,2]<-cor(rf_non[,10],rf_non[,2],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,3]<-cor(rf_non[,10],rf_non[,3],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,4]<-cor(rf_non[,10],rf_non[,4],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,5]<-cor(rf_non[,10],rf_non[,5],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,6]<-cor(rf_non[,10],rf_non[,6],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,7]<-cor(rf_non[,10],rf_non[,7],  method = "spearman", use = "na.or.complete")
+  tab_cor[k+i,8]<-cor(rf_non[,10],rf_non[,8],  method = "spearman", use = "na.or.complete")
+  
 }
 ################################################################################################
 
@@ -190,3 +192,8 @@ for (k in 1:length(t1)){
   
 }
 tab_pval
+
+# Test de différence entre les corrélations (test wilcox) pour les 2 variables qui n'ont pas une distribution normal
+wilcox.test(t1$`Rainfall of the day`, t2$`Rainfall of the day`)
+wilcox.test(t2$`Rainfall of the day before`,t1$`Rainfall of the day before`)
+

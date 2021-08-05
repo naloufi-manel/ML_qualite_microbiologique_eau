@@ -80,5 +80,5 @@ write.csv(rf_non, file = "/home/manel/Bureau/BD/donnee+pluvio/smv-complet/ML/rep
 seine <- read.csv("~/Bureau/BD/donnee+pluvio/smv+vdp-pluvio/donnee-sans-na/smv-vdp/seine.csv")
 summary(seine)
 par(mfrow=c(1,2))
-hist(rf[[4]], nclass = 5000, xlab = "Conductivite", xlim =c(425,1407))
-hist(rf[[8]], nclass = 5000, xlab = "Pluvio de la veille", xlim =c(0,42.2))
+hist(rf[[2]], nclass = 5000, xlab = "Temperature", xlim =c(15.6,27.5))
+hist(rf[[3]], nclass = 5000, xlab = "Conductivite", xlim =c(425,1407))
