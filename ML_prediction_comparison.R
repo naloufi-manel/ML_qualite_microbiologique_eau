@@ -6,19 +6,29 @@
 # Visualisation de la distribution des données de notre jeu de données. 
 # Marne
 smv <- read.csv("~/Bureau/BD/donnee+pluvio/smv-complet/donnee_brute_sans_na/smv.csv")
-par(mfrow=c(2,5))
+titre<-c("Température (°C)", "Conductivité (µS/cm)","Turbidité (FNU)", "MES (mg/L)", "NH4+ (mg(N)/L)", "NTK (mg(N)/L)", "Nombre de jours secs (jours) ", "Pluviométrie du jour (mm)", "Pluviométrie de la veille (mm)", "Débit à Gournay-sur-Marne (m3/s)")
+par(mfrow=c(3,4))
+par(mar=c(3, 0.5, 1, 2))
+#    oma = c(4, 4, 0.2, 0.2))
 for (i in 5: length(smv)){
-  boxplot(smv[,i], col="grey", ylab=colnames(smv)[i])
+  boxplot(smv[,i], col="grey")
+  mtext(side = 1, titre[i-4], line = 1, cex.lab=1.5)
 }
-boxplot(log(smv$Ecoli), col="grey", ylab="Log (E.coli)")
+
+boxplot(log(smv$Ecoli), col="grey")
+mtext(side = 1, "E.coli (log NPP/100ml)", line = 1, cex.lab=1.5)
 
 # Seine
 seine <- read.csv("/home/manel/Bureau/BD/donnee+pluvio/smv+vdp-pluvio/donnee-sans-na/smv-vdp/seine.csv")
+titre<-c("Température (°C)", "Conductivité (µS/cm)","Turbidité (FNU)", "Nombre de jours secs (jours) ", "Pluviométrie du jour (mm)", "Pluviométrie de la veille (mm)", "Débit à Austerlitz (m3/s)")
 par(mfrow=c(2,4))
+par(mar=c(3, 0.5, 1, 2))
 for (i in 5: length(seine)){
-  boxplot(seine[,i], col="grey", ylab=colnames(seine)[i])
+  boxplot(seine[,i], col="grey")
+  mtext(side = 1, titre[i-4], line = 1, cex.lab=1.5)
 }
-boxplot(log(seine$Ecoli), col="grey", ylab="Log (E.coli)")
+boxplot(log(seine$Ecoli), col="grey")
+mtext(side = 1, "E.coli (log NPP/100ml)", line = 1, cex.lab=1.5)
 
 # Visualisation graphique des résultats de performance (RMSE, MAE et RPD) des modèles d'apprentissage automatique.
 library(readxl)
